@@ -26,6 +26,8 @@ class _TextElementsState extends State<TextElements> {
             child: ListBody(
               children: <Widget>[
                 TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   controller: _contoller,
                   onSubmitted: (String value) => {_contoller.text = value},
                 ),
@@ -72,9 +74,19 @@ class _TextElementsState extends State<TextElements> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(textElements[mapKey]),
-              ElevatedButton(onPressed: () => {_showMyDialog(mapKey, textElements[mapKey])}, child: Text(mapKey))
+              Text(mapKey,
+              style: TextStyle(
+                fontWeight: FontWeight.bold
+              ),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(textElements[mapKey]),
+                  IconButton(icon: Icon(Icons.edit), onPressed: () => {_showMyDialog(mapKey, textElements[mapKey])})
+                ],
+              ),
             ],
           );
         });
