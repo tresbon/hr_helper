@@ -13,9 +13,7 @@ class _TextElementsState extends State<TextElements> {
   };
 
   Future<void> _showMyDialog(String mapKey, String mapValue) async {
-    TextEditingController _contoller = TextEditingController(
-      text: mapValue
-    );
+    TextEditingController _contoller = TextEditingController(text: mapValue);
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -76,15 +74,18 @@ class _TextElementsState extends State<TextElements> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(mapKey,
-              style: TextStyle(
-                fontWeight: FontWeight.bold
-              ),),
+              Text(
+                mapKey,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(textElements[mapKey]),
-                  IconButton(icon: Icon(Icons.edit), onPressed: () => {_showMyDialog(mapKey, textElements[mapKey])})
+                  IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () =>
+                          {_showMyDialog(mapKey, textElements[mapKey])})
                 ],
               ),
             ],
