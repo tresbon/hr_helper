@@ -63,33 +63,81 @@ class _TextElementsState extends State<TextElements> {
     );
   }
 
+  Future<void> _addSkillDialog() async {
+    TextEditingController _contoller = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Добавить навык"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  controller: _contoller,
+                  onSubmitted: (String value) => {_contoller.text = value},
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Отменить'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Сохранить'),
+              onPressed: () {
+                setState(() {
+                  textElements[_contoller.text] = "";
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: textElements.length,
-        itemBuilder: (BuildContext context, int index) {
-          String mapKey = textElements.keys.elementAt(index);
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                mapKey,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      children: [
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: textElements.length,
+            itemBuilder: (BuildContext context, int index) {
+              String mapKey = textElements.keys.elementAt(index);
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(textElements[mapKey]),
-                  IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () =>
-                          {_showMyDialog(mapKey, textElements[mapKey])})
+                  Text(
+                    mapKey,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(textElements[mapKey]),
+                      IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () =>
+                              {_showMyDialog(mapKey, textElements[mapKey])})
+                    ],
+                  ),
                 ],
-              ),
-            ],
-          );
-        });
+              );
+            }),
+        ElevatedButton(onPressed: () => {_addSkillDialog()}, child: Text("Добавить навык"),),
+
+      ],
+    );
   }
 }
