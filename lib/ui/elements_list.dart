@@ -135,8 +135,10 @@ class _TextElementsState extends State<TextElements> {
                 ],
               );
             }),
-        ElevatedButton(onPressed: () => {_addSkillDialog()}, child: Text("Добавить навык"),),
-
+        ElevatedButton(
+          onPressed: () => {_addSkillDialog()},
+          child: Text("Добавить навык"),
+        ),
       ],
     );
   }

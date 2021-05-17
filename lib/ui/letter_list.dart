@@ -4,10 +4,7 @@ import 'letter_header.dart';
 import 'package:flutter/material.dart';
 
 class Letter extends StatelessWidget {
-
   Widget textElements = TextElements();
-
-
 
   @override
   Widget build(BuildContext context) {
