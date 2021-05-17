@@ -1,10 +1,20 @@
+import 'package:flutter/services.dart';
+
 import 'elements_list.dart';
-import 'letter_footer.dart';
-import 'letter_header.dart';
+import 'single_letter_element.dart';
 import 'package:flutter/material.dart';
 
 class Letter extends StatelessWidget {
-  Widget textElements = TextElements();
+  Widget textElements = TextElements({
+    "Системное мышление": "",
+    "Софт скиллы": "",
+  });
+  Widget letterHeader = SingleLetterElement("This is a header");
+  Widget letterFooter = SingleLetterElement("This is a footer");
+
+  void copyText(String s) {
+    Clipboard.setData(ClipboardData(text: s));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +23,11 @@ class Letter extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         children: [
-          LetterHeader(),
+          letterHeader,
           textElements,
-          LetterFooter(),
+          letterFooter,
+          ElevatedButton(onPressed: () {},
+          child: Text("Копировать"),)
         ],
       ),
     );

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TextElements extends StatefulWidget {
+  Map<String, String> textElements;
+  TextElements(this.textElements);
   @override
   _TextElementsState createState() => _TextElementsState();
 }
 
 class _TextElementsState extends State<TextElements> {
-  @override
-  Map<String, String> textElements = {
-    "Системное мышление": "",
-    "Софт скиллы": "",
-  };
+
+  Map getTextElements() {
+    return widget.textElements;
+  }
 
   Future<void> _showMyDialog(String mapKey, String mapValue) async {
     TextEditingController _contoller = TextEditingController(text: mapValue);
@@ -37,7 +38,7 @@ class _TextElementsState extends State<TextElements> {
               child: Text('Удалить'),
               onPressed: () {
                 setState(() {
-                  textElements.remove(mapKey);
+                  widget.textElements.remove(mapKey);
                 });
                 Navigator.of(context).pop();
               },
@@ -52,7 +53,7 @@ class _TextElementsState extends State<TextElements> {
               child: Text('Сохранить'),
               onPressed: () {
                 setState(() {
-                  textElements[mapKey] = _contoller.text;
+                  widget.textElements[mapKey] = _contoller.text;
                 });
                 Navigator.of(context).pop();
               },
@@ -94,7 +95,7 @@ class _TextElementsState extends State<TextElements> {
               child: Text('Сохранить'),
               onPressed: () {
                 setState(() {
-                  textElements[_contoller.text] = "";
+                  widget.textElements[_contoller.text] = "";
                 });
                 Navigator.of(context).pop();
               },
@@ -105,34 +106,42 @@ class _TextElementsState extends State<TextElements> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListView.builder(
             shrinkWrap: true,
-            itemCount: textElements.length,
+            itemCount: widget.textElements.length,
             itemBuilder: (BuildContext context, int index) {
-              String mapKey = textElements.keys.elementAt(index);
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    mapKey,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(textElements[mapKey]),
-                      IconButton(
-                          icon: Icon(Icons.edit),
-                          onPressed: () =>
-                              {_showMyDialog(mapKey, textElements[mapKey])})
-                    ],
-                  ),
-                ],
+              String mapKey = widget.textElements.keys.elementAt(index);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      mapKey,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(widget.textElements[mapKey]),
+                        IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () =>
+                                {_showMyDialog(mapKey, widget.textElements[mapKey])})
+                      ],
+                    ),
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                    )
+                  ],
+                ),
               );
             }),
         ElevatedButton(
