@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 
 class TextElements extends StatefulWidget {
   Map<String, String> textElements;
+
   TextElements(this.textElements);
+
+  String getTextElements() {
+    return textElements.entries.fold(
+        "", (k, v) => k.toString() + v.key + "\n" * 2 + v.value + "\n" * 2);
+  }
+
   @override
   _TextElementsState createState() => _TextElementsState();
 }
 
 class _TextElementsState extends State<TextElements> {
-
   Map getTextElements() {
     return widget.textElements;
   }
@@ -132,8 +138,10 @@ class _TextElementsState extends State<TextElements> {
                         Text(widget.textElements[mapKey]),
                         IconButton(
                             icon: Icon(Icons.edit),
-                            onPressed: () =>
-                                {_showMyDialog(mapKey, widget.textElements[mapKey])})
+                            onPressed: () => {
+                                  _showMyDialog(
+                                      mapKey, widget.textElements[mapKey])
+                                })
                       ],
                     ),
                     Divider(

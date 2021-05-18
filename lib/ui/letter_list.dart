@@ -5,15 +5,18 @@ import 'single_letter_element.dart';
 import 'package:flutter/material.dart';
 
 class Letter extends StatelessWidget {
-  Widget textElements = TextElements({
+  TextElements textElements = TextElements({
     "Системное мышление": "",
     "Софт скиллы": "",
   });
-  Widget letterHeader = SingleLetterElement("This is a header");
-  Widget letterFooter = SingleLetterElement("This is a footer");
+  SingleLetterElement letterHeader = SingleLetterElement("This is a header");
+  SingleLetterElement letterFooter = SingleLetterElement("This is a footer");
 
-  void copyText(String s) {
-    Clipboard.setData(ClipboardData(text: s));
+  void copyText() {
+    String copiedText = letterHeader.getText() +
+        textElements.getTextElements() +
+        letterFooter.getText();
+    Clipboard.setData(ClipboardData(text: copiedText));
   }
 
   @override
@@ -26,8 +29,14 @@ class Letter extends StatelessWidget {
           letterHeader,
           textElements,
           letterFooter,
-          ElevatedButton(onPressed: () {},
-          child: Text("Копировать"),)
+          ElevatedButton(
+            onPressed: () {
+              copyText();
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Текст скопирован!")));
+            },
+            child: Text("Копировать"),
+          )
         ],
       ),
     );

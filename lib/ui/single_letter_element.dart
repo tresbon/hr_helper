@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 
 class SingleLetterElement extends StatefulWidget {
   String text;
+
   SingleLetterElement(this.text);
+
+  String getText() {
+    return text + "\n"*2;
+  }
+
   @override
   _LetterFooterState createState() => _LetterFooterState();
 }
 
 class _LetterFooterState extends State<SingleLetterElement> {
-
   Future<void> _editLetteFieldDiaog() async {
     TextEditingController _contoller = TextEditingController(text: widget.text);
     return showDialog<void>(
@@ -59,7 +64,11 @@ class _LetterFooterState extends State<SingleLetterElement> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(widget.text),
-            IconButton(icon: Icon(Icons.edit), onPressed: (){_editLetteFieldDiaog();})
+            IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  _editLetteFieldDiaog();
+                })
           ],
         ),
         Divider(
