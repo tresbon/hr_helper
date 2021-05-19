@@ -6,7 +6,7 @@ class SingleLetterElement extends StatefulWidget {
   SingleLetterElement(this.text);
 
   String getText() {
-    return text + "\n"*2;
+    return text + "\n" * 2;
   }
 
   @override
@@ -63,7 +63,14 @@ class _LetterFooterState extends State<SingleLetterElement> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.text),
+            Expanded(
+              child: Text(
+                widget.text,
+                textAlign: TextAlign.justify,
+                textDirection: TextDirection.ltr,
+                softWrap: true,
+              ),
+            ),
             IconButton(
                 icon: Icon(Icons.edit),
                 onPressed: () {

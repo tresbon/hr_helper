@@ -7,7 +7,12 @@ class TextElements extends StatefulWidget {
 
   String getTextElements() {
     return textElements.entries.fold(
-        "", (k, v) => k.toString() + v.key + "\n" * 2 + v.value + "\n" * 2);
+        "",
+        (k, v) =>
+            k.toString() +
+            v.key +
+            "\n" * 2 +
+            ((v.value != "") ? v.value + "\n" * 2 : ""));
   }
 
   @override
@@ -26,7 +31,13 @@ class _TextElementsState extends State<TextElements> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(mapKey),
+          title: Expanded(
+              child: Text(
+            mapKey,
+            textAlign: TextAlign.justify,
+            textDirection: TextDirection.ltr,
+            softWrap: true,
+          )),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[

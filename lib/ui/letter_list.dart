@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-
 import 'elements_list.dart';
 import 'single_letter_element.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,10 @@ class Letter extends StatelessWidget {
     "Системное мышление": "",
     "Софт скиллы": "",
   });
-  SingleLetterElement letterHeader = SingleLetterElement("This is a header");
-  SingleLetterElement letterFooter = SingleLetterElement("This is a footer");
+  SingleLetterElement letterHeader = SingleLetterElement("""Добрый день, !\n
+По результатам собеседования мы оценили ваши навыки
+""");
+  SingleLetterElement letterFooter = SingleLetterElement("С уважением, ");
 
   void copyText() {
     String copiedText = letterHeader.getText() +
